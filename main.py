@@ -1,3 +1,6 @@
+# Assignment: Simulating a Distributed Task Execution System
+# Name: 24915 JDT Dilshan / 24452 WPDSM Weerasinghe
+
 import multiprocessing
 import time
 import networkx as nx
