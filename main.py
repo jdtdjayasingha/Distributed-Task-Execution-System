@@ -13,10 +13,19 @@ def worker_task(x):
 if __name__ == '__main__':
     tasks = [1, 2, 3, 4, 5, 6]
 
-    start_time = time.time()
-    results = [worker_task(x) for x in tasks]
-    end_time = time.time()
+    # Sequential
+    start_seq = time.time()
+    seq_results = [worker_task(x) for x in tasks]
+    end_seq = time.time()
+
+    # Parallel
+    start_par = time.time()
+    with multiprocessing.Pool(processes=3) as pool:
+        par_results = pool.map(worker_task, tasks)
+    end_par = time.time()
 
     print("Input tasks:", tasks)
-    print("Sequential results:", results)
-    print("Sequential execution time:", round(end_time - start_time, 2), "seconds")
+    print("Results:", par_results)
+    print("Sequential execution time:", f"~{round(end_seq - start_seq, 1)} seconds")
+    print("Total parallel execution time:", f"~{round(end_par - start_par, 1)} seconds")
+
