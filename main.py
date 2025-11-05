@@ -7,7 +7,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 def worker_task(x):
-    time.sleep(0.45)  # tuned delay so parallel < 1s
+    time.sleep(0.45)  # simulate computation delay (tuned so parallel < 1.0s)
     return x * x
 
 if __name__ == '__main__':
@@ -31,8 +31,9 @@ if __name__ == '__main__':
     print()
 
     G = nx.DiGraph()
+
     G.add_node("Master", color='lightblue')
-    workers = [f"Worker-{i}" for i in range(1, 3 + 1)]
+    workers = [f"Worker-{i}" for i in range(1, 3 + 1)]  # three workers
     for w in workers:
         G.add_node(w, color='lightgreen')
         G.add_edge("Master", w, label="Task")
@@ -45,5 +46,3 @@ if __name__ == '__main__':
     nx.draw_networkx_edge_labels(G, pos, edge_labels=nx.get_edge_attributes(G, 'label'))
     plt.title("Distributed Task Execution System")
     plt.show()
-
-
